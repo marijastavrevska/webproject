@@ -1,0 +1,607 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" xmlns:th="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Почетна</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Платформа за онлајн резервација во локали" />
+	<meta name="keywords" content="резервација во локали " />
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+
+		<link rel="stylesheet" href="css/fontawesome.css">
+	<!-- Superfish -->
+	<link rel="stylesheet" href="css/superfish.css">
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
+	<!-- CS Select -->
+	<link rel="stylesheet" href="css/cs-select.css">
+	<link rel="stylesheet" href="css/cs-skin-border.css">
+	
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+		<div id="fh5co-wrapper">
+		<div id="fh5co-page">
+
+		<header id="fh5co-header-section" class="sticky-banner">
+			<div class="container">
+				<div class="nav-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+					<h1 id="fh5co-logo"><a href="index" action="/index"><i class="icon-desktop"></i>Travel</a></h1>
+
+					<!-- START #fh5co-menu-wrap -->
+					<nav id="fh5co-menu-wrap" role="navigation">
+						<ul class="sf-menu" id="fh5co-primary-menu">
+							<li class="active"><a href="index" action="/index">Почетна</a></li>
+							<li><a href="flight" action="/flight">Локали</a></li>
+							<li><a href="contact" action="/contact">Контакт</a></li>
+							<li><a href="login" action="/login">Регистрација</a></li>
+							<li>
+								<form action="#" th:action="@{/search}" method="post">
+									<div class="col-sm-6">
+										<input type="text" name ="name" class="form-control" placeholder=" Внеси"/></div>
+									<!--<a href="index" action="/index"><i class="icon-search3" style="padding-left: 10px;"></i></a></h1>-->
+									<button type="submit" class="btn btn-primary"><i class="icon-search3 fa-2x" aria-hidden="true"></i></button>
+								</form>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>
+
+		<!-- end:header-top -->
+	
+		<div class="fh5co-hero">
+			<div class="fh5co-overlay"></div>
+			<p th:if="${successful}" style="width: 1200px; padding-left: 500px; padding-top: 20px; color: black;">Вашата резервација ќе биде разгледана! Проверете ја состојбата на Вашата резервација на Вашиот профил.</p>
+	<!--		<p style="width: 1200px; padding-left: 800px; padding-top: 20px; color: black;">За да направите резервација, прво најавете се!</p>-->
+			<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_1.jpg);">
+				<div class="desc">
+
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-5 col-md-5">
+								<div class="tabulation animate-box">
+
+								  <!-- Nav tabs -->
+								   <ul class="nav nav-tabs" role="tablist">
+								      <!--<li role="presentation" class="active">
+								      	<a href="#flights" aria-controls="flights" role="tab" data-toggle="tab">Flights</a>
+								      </li>-->
+								      <li role="presentation" class="active">
+								    	   <a href="#hotels" aria-controls="hotels" role="tab" data-toggle="tab">Резервација</a>
+								      </li>
+								     
+								   </ul>
+
+								   <!-- Tab panes -->
+									<div class="tab-content">
+									 <div role="tabpanel" class="tab-pane active" id="flights">
+										<div class="row">
+											<form action="#" th:action="@{/reservation}" th:object="${reservation}" method="post">
+											<div class="col-xxs-12 col-xs-6 mt">
+												<div class="input-field">
+													<label for="from">Име и презиме:</label>
+													<input type="text" class="form-control" id="from-place" th:required="required" name="name" placeholder="Внеси име и презиме"/>
+												</div>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt">
+												<div class="input-field">
+													<label for="from">Емаил:</label>
+													<input type="text" class="form-control" id="to-place" th:required="required" name="email" placeholder="пример@gmail.com"/>
+												</div>
+											</div>
+											<div class="col-xs-6 mt">
+												<div class="input-field">
+													<label for="date-start">Датум:</label>
+
+											<input type="text" class="form-control" id="date-start" th:required="required" name="date" placeholder="dd/mm/yyyy"/>
+												</div>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt alternate">
+												<div class="input-field">
+													<label for="date-end">Време:</label>
+
+													<input type="time" min="09:00" max="22:05" class="form-control"  th:required="required" name="time" placeholder="hh:mm"/>
+												</div>
+											</div>
+											<div class="col-sm-12 mt">
+												<section>
+													<label for="class">Ресторан:</label>
+													<select th:object="${restaurants}" class="cs-select cs-skin-border" name="restaurant">
+														<option value="" disabled selected>Избери ресторан</option>
+														<option name = "restaurantName" th:each="restaurant : ${restaurants}"
+																th:text="${restaurant.name}"
+																th:required="required"/>
+														<!--<option value="first">Аурум</option>
+														<option value="business">Бела Куќа</option>-->
+													</select>
+												</section>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt">
+												<section>
+													<label for="class">Лица:</label>
+													<select class="cs-select cs-skin-border" name="persons">
+														<option value="" disabled selected>1</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+													</select>
+												</section>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt">
+												<section>
+													<label for="class">Телефон:</label>
+													<input type="text" class="form-control" id="telephone" name="phone" th:required="required" placeholder="xxx-xxx-xxx"/>
+													<input type="hidden" class="form-control" id="status" name="status" value="0"/>
+												</section>
+											</div>
+											<div class="col-xs-12">
+												<input type="submit" class="btn btn-primary btn-block" value="Резервирај"><!-- th:if="${loggedin}"-->
+											</div>
+											</form>
+										</div>
+									 </div>
+									</div>
+								</div>
+							</div>
+							<div class="desc2 animate-box">
+								<div class="col-sm-7 col-sm-push-1 col-md-7 col-md-push-1">
+									<p>Најлесен начин за резервација</p>
+									<h2>Со неколку клика до резервација</h2>
+									<!--<span class="price">$599</span>-->
+									<!-- <p><a class="btn btn-primary btn-lg" href="#">Get Started</a></p> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
+		<div id="fh5co-tours" class="fh5co-section-gray">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+						<h3>Најпосетени</h3>
+						<p>Ги издволуваме омилените ресторани на нашите корисници.</p>
+					</div>
+				</div>
+
+
+				<ul style="list-style: none;">
+					<div class="row">
+
+						<li th:each="restaurant : ${restaurants}" th:if="${restaurant.id}<4">
+							<div class="col-md-4 col-sm-6 fh5co-tours animate-box" data-animate-effect="fadeIn">
+								<div href="#"><img th:src="@{./images/{imageId}(imageId=${restaurant.picture1})}" class="img-responsive">
+									<div class="desc">
+										<span></span>
+										<h3 th:text="${restaurant.name}">Default</h3>
+										<span th:text="${restaurant.short_description}">Default</span>
+										<a class="btn btn-primary btn-outline" th:href="@{/restaurants/{id}(id = ${restaurant.id})}">Види повеќе<i class="icon-arrow-right22"></i></a>
+									</div>
+								</div></div>
+						</li>
+
+					</div>
+				</ul>
+
+					<div class="col-md-12 text-center animate-box">
+						<p><a class="btn btn-primary btn-outline btn-lg" href="/restaurants">Види ги сите...<i class="icon-arrow-right22"></i></a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="fh5co-features">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 animate-box">
+
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-hotairballoon"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>Фамилијарна посета</h3>
+								<p>Закажете ја Вашата посета во Вашиот омилен ресторан и поминете квалитетно време со Вашата фамилија.</p>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-search"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>Пронајдете match</h3>
+								<p>Лесно за пребарување на нови ресторани и ресторани низ цела Македонија</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-wallet"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>Пребарувате по цена</h3>
+								<p>Нашата визија е секој да може да ги разгледа рестораните и нивната оцена за цената.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 animate-box">
+
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-wine"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>Бизнис состаноци</h3>
+								<p>Ви нудиме резервации за бизнис состаноци, конференции и секаков вид на бизнис зделки.</p>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-genius"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>Пакети и попусти</h3>
+								<p>Како што ќе резервирате почесто, така Вие берите поени и сте можни добитници на награди кои ги доделуваме секој месец.</p>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-chat"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>Контактирате не!</h3>
+								<p>За секоја информација што Ве интересира, можете слободно да не контактирате и да го рекламирате Вашиот бизнис на нашата страна.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		<div id="fh5co-destination">
+			<div class="tour-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<ul id="fh5co-destination-list" class="animate-box">
+							<li class="one-forth text-center" style="background-image: url(images/place-1.jpg); ">
+								<a href="/skopje">
+									<div class="case-studies-summary">
+										<h2>Скопје</h2>
+									</div>
+								</a>
+							</li>
+							<li class="one-forth text-center" style="background-image: url(images/place-2.jpg); ">
+								<a href="/bitola">
+									<div class="case-studies-summary">
+										<h2>Битола</h2>
+									</div>
+								</a>
+							</li>
+							<li class="one-forth text-center" style="background-image: url(images/place-3.jpg); ">
+								<a href="#">
+									<div class="case-studies-summary">
+										<h2>Кочани</h2>
+									</div>
+								</a>
+							</li>
+							<li class="one-forth text-center" style="background-image: url(images/place-4.jpg); ">
+								<a href="/prilep">
+									<div class="case-studies-summary">
+										<h2>Прилеп</h2>
+									</div>
+								</a>
+							</li>
+
+							<li class="one-forth text-center" style="background-image: url(images/place-5.jpg); ">
+								<a href="#">
+									<div class="case-studies-summary">
+										<h2>Штип</h2>
+									</div>
+								</a>
+							</li>
+							<li class="one-half text-center">
+								<div class="title-bg">
+									<div class="case-studies-summary">
+										<h2>Организираност по градови</h2>
+									</div>
+								</div>
+							</li>
+							<li class="one-forth text-center" style="background-image: url(images/place-6.jpg); ">
+								<a href="#">
+									<div class="case-studies-summary">
+										<h2>Охрид</h2>
+									</div>
+								</a>
+							</li>
+							<li class="one-forth text-center" style="background-image: url(images/place-7.jpg); ">
+								<a href="#">
+									<div class="case-studies-summary">
+										<h2>Струга</h2>
+									</div>
+								</a>
+							</li>
+							<li class="one-forth text-center" style="background-image: url(images/place-8.jpg); ">
+								<a href="#">
+									<div class="case-studies-summary">
+										<h2>Велес</h2>
+									</div>
+								</a>
+							</li>
+							<li class="one-forth text-center" style="background-image: url(images/place-9.jpg); ">
+								<a href="#">
+									<div class="case-studies-summary">
+										<h2>Гевгелија</h2>
+									</div>
+								</a>
+							</li>
+							<li class="one-forth text-center" style="background-image: url(images/place-10.jpg); ">
+								<a href="#">
+									<div class="case-studies-summary">
+										<h2>Струмица</h2>
+									</div>
+								</a>
+							</li>
+						</ul>		
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="fh5co-blog-section" class="fh5co-section-gray">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+						<h3>Нашиот блог</h3>
+						<p>Најдете ги сите наши препораки за храна, ресторани, места за релаксација и многу други информации на нашиот блог.</p>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row row-bottom-padded-md">
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<div class="fh5co-blog animate-box">
+							<a href="#"><img class="img-responsive" src="images/place-1.jpg" alt=""></a>
+							<div class="blog-text">
+								<div class="prod-title">
+									<h3><a href="#">8-мо мартски забави</a></h3>
+									<span class="posted_by">Фев. 15ти</span>
+									<span class="comment"><a href="">21<i class="icon-bubble2"></i></a></span>
+									<p>Прославете го денот на жената и покажете и го вниманието што го заслужува со нашите издвоени места за прослава...</p>
+									<p><a href="#">Learn More...</a></p>
+								</div>
+							</div> 
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<div class="fh5co-blog animate-box">
+							<a href="#"><img class="img-responsive" src="images/place-2.jpg" alt=""></a>
+							<div class="blog-text">
+								<div class="prod-title">
+									<h3><a href="#">Организирајте ја Вашата роденденска забава</a></h3>
+									<span class="posted_by">Фев. 17th</span>
+									<span class="comment"><a href="">21<i class="icon-bubble2"></i></a></span>
+									<p>Се двоумите каде да го прославите Вашиот роденден? Ние сме тука за да Ви помогнеме! Погледнете ги нашите омилени места за прослава...</p>
+									<p><a href="#">Learn More...</a></p>
+								</div>
+							</div> 
+						</div>
+					</div>
+					<div class="clearfix visible-sm-block"></div>
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<div class="fh5co-blog animate-box">
+							<a href="#"><img class="img-responsive" src="images/place-3.jpg" alt=""></a>
+							<div class="blog-text">
+								<div class="prod-title">
+									<h3><a href="#">Посета на Гевгелија</a></h3>
+									<span class="posted_by">Јан. 19th</span>
+									<span class="comment"><a href="">21<i class="icon-bubble2"></i></a></span>
+									<p>Планирате посета на Гевгелија? Организирајте се уште пред тргнување. Еве што да посетите...</p>
+									<p><a href="#">Learn More...</a></p>
+								</div>
+							</div> 
+						</div>
+					</div>
+					<div class="clearfix visible-md-block"></div>
+				</div>
+
+				<div class="col-md-12 text-center animate-box">
+					<p><a class="btn btn-primary btn-outline btn-lg" href="#">Сите постови <i class="icon-arrow-right22"></i></a></p>
+				</div>
+
+			</div>
+		</div>
+		<!-- fh5co-blog-section -->
+		<div id="fh5co-testimonial" style="background-image:url(images/img_bg_1.jpg);">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>Задоволни клиенти</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="box-testimony animate-box">
+						<blockquote>
+							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
+							<p>&ldquo;Резервирањето е толку лесно! Можам да резервирам од работа, додека сум на кафе, додека патувам - без никаков проблем и дополнителни договори!&rdquo;</p>
+						</blockquote>
+						<p class="author">John Doe<span class="subtext">username</span></p>
+					</div>
+					
+				</div>
+				<div class="col-md-4">
+					<div class="box-testimony animate-box">
+						<blockquote>
+							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
+							<p>&ldquo;Веќе направив 10 резервации и сега имам попуст од 10% во мојот омилен ресторан.&rdquo;</p>
+						</blockquote>
+						<p class="author">John Doe<span class="subtext">username</span></p>
+					</div>
+					
+					
+				</div>
+				<div class="col-md-4">
+					<div class="box-testimony animate-box">
+						<blockquote>
+							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
+							<p>&ldquo;Сите промоции од рестораните ги следам и резервирам. Одличен начин за да искористам различни промоции.&rdquo;</p>
+						</blockquote>
+						<p class="author">John Doe<span class="subtext">username</span></p>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+		<footer>
+			<div id="footer">
+				<div class="container">
+					<div class="row row-bottom-padded-md">
+						<div class="col-md-3 col-sm-3 col-xs-12 fh5co-footer-link">
+							<h3>За нас</h3>
+							<p>Стартап програма за онлајн резервации во локали.</p>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-12 fh5co-footer-link">
+							<h3>Авторско право</h3>
+							<ul>
+								<li><a href="#">Услуги</a></li>
+								<li><a href="#">Авторски права</a></li>
+							</ul>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-12 fh5co-footer-link">
+							<h3>Контакт</h3>
+							<ul>
+								<li><a href="#">+38977123456</a></li>
+								<li><a href="#">ул. Улица бр. бр</a></li>
+								<li><a href="#">меил@меил.com</a></li>
+							</ul>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-12 fh5co-footer-link">
+							<h3>Топ локали</h3>
+							<ul>
+								<li><a href="#">Манаки</a></li>
+								<li><a href="#">Аурум</a></li>
+								<li><a href="#">Бела куќа</a></li>
+								<li><a href="#">Вино Бар Буре</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3 text-center">
+							<p class="fh5co-social-icons">
+								<a href="#"><i class="icon-facebook2"></i></a>
+								<a href="#"><i class="icon-instagram"></i></a>
+							</p>
+							<p>Copyright 2020. All Rights Reserved.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+	
+
+	</div>
+	<!-- END fh5co-page -->
+
+	</div>
+	<!-- END fh5co-wrapper -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+	<!-- jQuery -->
+
+
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="../js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/sticky.js"></script>
+
+	<!-- Stellar -->
+	<script src="js/jquery.stellar.min.js"></script>
+	<!-- Superfish -->
+	<script src="js/hoverIntent.js"></script>
+	<script src="js/superfish.js"></script>
+	<!-- Magnific Popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	<!-- Date Picker -->
+	<script src="js/bootstrap-datepicker.min.js"></script>
+		<script src="js/bootstrap-datetimepicker.js"></script>
+	<!-- CS Select -->
+	<script src="js/classie.js"></script>
+	<script src="js/selectFx.js"></script>
+	
+	<!-- Main JS -->
+	<script src="js/main.js"></script>
+
+	</body>
+</html>
+

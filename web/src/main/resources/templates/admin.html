@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Админ</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="is-preload">
+<!-- Header -->
+<header id="header">
+    <div class="inner">
+        <ul class="actions" style="float:right; display: block;">
+            <li><a href="/index" class="button primary small">Почетна</a></li>
+        </ul>
+        <a href="#" style="display: block;" class="image avatar"><img style="padding-top: 30px;" src="images/bg-title-02.jpg" alt="" /></a><!--profilna slika-->
+        <h1><strong>Добредојдовте</strong> <span th:text="${username}"></span><br />
+            , на Вашиот профил!<br />
+        </h1>
+    </div>
+</header>
+
+<!-- Main -->
+<div id="main">
+    <!-- One -->
+    <section id="one">
+        <header class="major">
+            <h2>Преглед на резервации:</h2>
+        </header>
+        <p>Потврдете ги резервациите: </p>
+    </section>
+    <!-- Four -->
+    <section id="four">
+
+        <section >
+            <div class="table-wrapper">
+                <table class="alt">
+                    <thead>
+                    <tr>
+                        <th scope="col">Име и презиме</th>
+                        <th scope="col">Ресторан</th>
+                        <th scope="col">Датум</th>
+                        <th scope="col">Час</th>
+                        <th scope="col">Лица</th>
+                        <th scope="col">Потврдена</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="reservation : ${reservations}">
+                        <td><span th:text="${reservation.customer_id}"> </span></td>
+                        <td><span th:text="${reservation.restaurant_id}"> </span></td>
+                        <td><span th:text="${reservation.date}"> </span></td>
+                        <td><span th:text="${reservation.time}"> </span></td>
+                        <td><span th:text="${reservation.people}"> </span></td>
+                        <!--forma da se napravi za sekoe posebno i post method da ima i posle toa da se pishi kotroler-->
+                        <td>
+                            <form th:action="@{/admin}" method="post">
+                                <input type="hidden" name="id" th:value="${reservation.id}"/>
+                                <input type="hidden" name="accept" value="true"/>
+                                <button type="submit" class="button primary small">Потврди</button>
+                                <p th:if="${accepted}" style="text-align: justify; padding-left: 45px;">Резервацијата е потврдена!</p>
+                            </form>
+                            <form th:action="@{/admin}" method="post">
+                                <input type="hidden" name="id" th:value="${reservation.id}"/>
+                                <input type="hidden" name="accept" value="false"/>
+                                <button class="button notprimary small">Одбиј</button>
+                            </form>
+                        </td>  <!--primary za zeleno-->
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </section>
+    <section>
+        <h4>Buttons</h4>
+        <ul class="actions">
+            <li><a href="#" class="button primary small">Primary</a></li>
+        </ul>
+        <ul class="actions">
+
+            <li><a href="#" class="button">Default</a></li>
+
+        </ul>
+        <p>Додај ресторан:</p>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="flights">
+                <div class="row">
+                    <form action="#" th:action="@{/add}" method="post">
+                        <div class="col-xxs-12 col-xs-6 mt">
+                            <div class="input-field">
+                                <label>Име на ресторан:</label>
+                                <input type="text" class="form-control" id="from-place" th:required="required" name="name" placeholder="Внеси име на ресторан"/>
+                            </div>
+                        </div>
+                        <div class="col-xxs-12 col-xs-6 mt">
+                            <div class="input-field">
+                                <label>Краток опис:</label>
+                                <input type="text" class="form-control" id="to-place" th:required="required" name="short_description" placeholder="Внеси краток опис"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 mt">
+                            <div class="input-field">
+                                <label for="date-start">Опис:</label>
+                                <input type="text" class="form-control" id="date-start" th:required="required" name="description" placeholder="Внеси опис"/>
+                            </div>
+                        </div>
+                        <div class="col-xxs-12 col-xs-6 mt alternate">
+                        <div class="input-field">
+                            <label>Град:</label>
+                            <input type="text" class="form-control"  th:required="required" name="city" placeholder="Внеси град:"/>
+                            <input type="text" class="form-control"  th:required="required" name="slug_city" placeholder="Внеси град на латиница:"/>
+                        </div>
+                    </div>
+                        <div class="col-xxs-12 col-xs-6 mt alternate">
+                            <div class="input-field">
+                                <label>Капацитет:</label>
+                                <input type="text" class="form-control"  th:required="required" name="capacity" placeholder="Внеси капацитет:"/>
+                            </div>
+                        </div>
+                        <div class="col-xxs-12 col-xs-6 mt alternate">
+                            <div class="input-field">
+                                <label>Статус:</label>
+                                <input type="text" class="form-control"  th:required="required" name="status" placeholder="Внеси статус"/>
+                            </div>
+                        </div>
+
+                        <div class="col-xxs-12 col-xs-6 mt">
+                            <section>
+                                <label>Слики:</label>
+                                <input type="text" class="form-control" id="picture1" name="picture1" th:required="required"/>
+                            </section>
+                        </div>
+                        <div class="col-xxs-12 col-xs-6 mt">
+                            <section>
+                                <label>Слики:</label>
+                                <input type="text" class="form-control" id="picture2" name="picture2" th:required="required"/>
+                            </section>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <input type="submit" class="btn btn-primary btn-block" value="Внеси нов ресторан"><!-- th:if="${loggedin}"-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+
+<!-- Footer
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+                <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+                <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </footer>-->
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.poptrox.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
